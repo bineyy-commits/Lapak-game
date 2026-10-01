@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LapakGame — Jual Beli Akun & Top Up Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12122b;
+    --bg-alt:#191938;
+    --card:#1d1d42;
+    --line:#31316a;
+    --gold:#ffb454;
+    --mint:#7ce0a3;
+    --text:#f1f0fa;
+    --muted:#a6a4cf;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:inherit;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);}
+  html,body{height:100%;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.logo{font-family:'Chakra Petch',system-ui,sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+    background:rgba(18,18,43,.88);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1080px;margin:0 auto;}
+  .logo{font-size:1.25rem;font-weight:700;display:flex;align-items:center;gap:8px;}
+  .logo-mark{width:20px;height:20px;background:var(--gold);border-radius:5px 5px 5px 0;flex-shrink:0;}
+  .nav-links{display:flex;gap:28px;font-size:.92rem;color:var(--muted);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{background:var(--gold);color:#1a1200;padding:9px 18px;border-radius:8px;font-weight:600;font-size:.9rem;}
+  @media (max-width:720px){.nav-links{display:none;}}
+
+  /* HERO */
+  .hero{padding:72px 0 56px;position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;}
+  @media (max-width:820px){.hero-grid{grid-template-columns:1fr;}}
+  .eyebrow{color:var(--gold);font-size:.95rem;font-weight:600;margin-bottom:14px;}
+  h1{font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.12;font-weight:700;letter-spacing:-.01em;}
+  .hero p.lead{color:var(--muted);font-size:1.08rem;margin-top:18px;max-width:46ch;}
+  .hero-actions{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
+  .btn-primary{background:var(--gold);color:#1a1200;padding:13px 24px;border-radius:9px;font-weight:600;}
+  .btn-ghost{border:1px solid var(--line);padding:13px 24px;border-radius:9px;font-weight:600;color:var(--text);}
+  .stats{display:flex;gap:32px;margin-top:44px;flex-wrap:wrap;}
+  .stat b{display:block;font-family:'Chakra Petch';font-size:1.7rem;color:var(--gold);}
+  .stat span{color:var(--muted);font-size:.85rem;}
+
+  /* Hero visual: stylized d-pad/cartridge */
+  .pad{position:relative;width:100%;max-width:320px;aspect-ratio:1;margin:0 auto;}
+  .pad-cross{position:absolute;inset:0;margin:auto;width:70%;height:70%;}
+  .pad-arm{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:10px;}
+  .pad-arm.v{width:34%;height:100%;left:33%;top:0;}
+  .pad-arm.h{height:34%;width:100%;top:33%;left:0;}
+  .pad-dot{position:absolute;width:16%;height:16%;border-radius:50%;background:var(--gold);top:42%;left:42%;}
+  .pad-ring{position:absolute;inset:0;border:1px dashed var(--line);border-radius:50%;}
+
+  section{padding:64px 0;}
+  .section-head{max-width:56ch;margin-bottom:38px;}
+  .section-head .kicker{color:var(--gold);font-weight:600;font-size:.9rem;margin-bottom:8px;}
+  h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;}
+  .section-head p{color:var(--muted);margin-top:10px;}
+
+  /* SERVICES */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  @media (max-width:760px){.services{grid-template-columns:1fr;}}
+  .svc{background:var(--bg-alt);padding:28px 24px;}
+  .svc h3{font-size:1.1rem;margin-bottom:8px;}
+  .svc p{color:var(--muted);font-size:.92rem;}
+  .svc .tag{display:inline-block;color:var(--mint);font-size:.78rem;font-weight:600;margin-bottom:14px;}
+
+  /* PORTFOLIO */
+  .filter-note{color:var(--muted);font-size:.85rem;margin-bottom:22px;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media (max-width:820px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.grid{grid-template-columns:1fr;}}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px;}
+  .item .game{font-size:.78rem;color:var(--muted);}
+  .item h3{font-size:1.02rem;}
+  .item .price{color:var(--gold);font-weight:600;font-family:'Chakra Petch';}
+  .status{align-self:flex-start;font-size:.72rem;padding:3px 9px;border-radius:6px;font-weight:600;}
+  .status.sold{background:rgba(124,224,163,.14);color:var(--mint);}
+  .status.ready{background:rgba(255,180,84,.14);color:var(--gold);}
+
+  /* PROCESS */
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  @media (max-width:820px){.process{grid-template-columns:repeat(2,1fr);}}
+  .step{border-left:2px solid var(--gold);padding-left:16px;}
+  .step .n{font-family:'Chakra Petch';color:var(--gold);font-size:1.3rem;font-weight:700;}
+  .step h3{font-size:1rem;margin:6px 0 6px;}
+  .step p{color:var(--muted);font-size:.88rem;}
+
+  /* TESTIMONI */
+  .testi-row{display:flex;gap:18px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin;}
+  .testi{flex:0 0 280px;background:var(--bg-alt);border:1px solid var(--line);border-radius:12px;padding:22px;}
+  .testi p{color:var(--text);font-size:.94rem;}
+  .testi .who{margin-top:14px;color:var(--muted);font-size:.82rem;}
+
+  /* CTA */
+  .cta-box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:44px;text-align:center;}
+  .cta-box h2{margin-bottom:12px;}
+  .cta-box p{color:var(--muted);max-width:48ch;margin:0 auto 24px;}
+
+  footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.85rem;}
+  .foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .fade-in{animation:fadeUp .6s ease both;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="logo-mark"></span>LapakGame</div>
+    <div class="nav-links">
+      <a href="#layanan">Layanan</a>
+      <a href="#portofolio">Portofolio</a>
+      <a href="#proses">Cara Kerja</a>
+      <a href="#testimoni">Testimoni</a>
+    </div>
+    <a class="nav-cta" href="#kontak">Hubungi</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="fade-in">
+      <div class="eyebrow">Jual beli akun & top up game</div>
+      <h1>Transaksi game yang aman, tanpa drama.</h1>
+      <p class="lead">Saya bantu jual, beli, dan top up akun game favoritmu — dari Mobile Legends sampai Valorant. Proses jelas, harga wajar, dan ada garansi di setiap transaksi.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#kontak">Mulai Transaksi</a>
+        <a class="btn-ghost" href="#portofolio">Lihat Portofolio</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>420+</b><span>Transaksi selesai</span></div>
+        <div class="stat"><b>4.9/5</b><span>Rating pembeli</span></div>
+        <div class="stat"><b>3</b><span>Tahun aktif jualan</span></div>
+      </div>
+    </div>
+    <div class="pad fade-in">
+      <div class="pad-ring"></div>
+      <div class="pad-cross">
+        <div class="pad-arm v"></div>
+        <div class="pad-arm h"></div>
+        <div class="pad-dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="layanan">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Layanan</div>
+      <h2>Apa yang bisa saya bantu</h2>
+      <p>Tiga layanan utama yang paling sering dicari pembeli dan penjual akun game.</p>
+    </div>
+    <div class="services">
+      <div class="svc">
+        <span class="tag">Jual akun</span>
+        <h3>Titip jual akun kamu</h3>
+        <p>Kirim data akun, saya bantu pasarkan dan carikan pembeli yang cocok. Kamu tinggal terima hasilnya.</p>
+      </div>
+      <div class="svc">
+        <span class="tag">Beli akun</span>
+        <h3>Cari akun sesuai budget</h3>
+        <p>Kasih tahu rank, item, atau skin yang kamu incar — saya carikan pilihan akun yang sesuai.</p>
+      </div>
+      <div class="svc">
+        <span class="tag">Top up</span>
+        <h3>Top up diamond & UC</h3>
+        <p>Top up untuk Mobile Legends, PUBG Mobile, Free Fire, dan game populer lain, proses dalam hitungan menit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portofolio">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Portofolio</div>
+      <h2>Beberapa transaksi terakhir</h2>
+    </div>
+    <p class="filter-note">Contoh akun yang pernah terjual atau sedang tersedia.</p>
+    <div class="grid">
+      <div class="item">
+        <span class="game">Mobile Legends</span>
+        <h3>Akun Mythic, 120+ Skin</h3>
+        <span class="status sold">Terjual</span>
+        <span class="price">Rp 1.850.000</span>
+      </div>
+      <div class="item">
+        <span class="game">Genshin Impact</span>
+        <h3>AR 58, 6 Karakter 5-Bintang</h3>
+        <span class="status ready">Tersedia</span>
+        <span class="price">Rp 2.400.000</span>
+      </div>
+      <div class="item">
+        <span class="game">Valorant</span>
+        <h3>Immortal, Bundle Elderflame</h3>
+        <span class="status sold">Terjual</span>
+        <span class="price">Rp 950.000</span>
+      </div>
+      <div class="item">
+        <span class="game">PUBG Mobile</span>
+        <h3>Conqueror, Full Outfit Glacier</h3>
+        <span class="status ready">Tersedia</span>
+        <span class="price">Rp 1.200.000</span>
+      </div>
+      <div class="item">
+        <span class="game">Free Fire</span>
+        <h3>Akun Grandmaster, Bundle Elite</h3>
+        <span class="status sold">Terjual</span>
+        <span class="price">Rp 480.000</span>
+      </div>
+      <div class="item">
+        <span class="game">Honkai: Star Rail</span>
+        <h3>Trailblazer 60, 4 Karakter 5-Bintang</h3>
+        <span class="status ready">Tersedia</span>
+        <span class="price">Rp 1.650.000</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proses">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Cara kerja</div>
+      <h2>Empat langkah sampai transaksi selesai</h2>
+    </div>
+    <div class="process">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Hubungi & konsultasi</h3>
+        <p>Ceritakan kebutuhanmu — mau jual, beli, atau top up.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>Cek & sepakati harga</h3>
+        <p>Akun atau layanan dicek dulu, lalu harga disepakati bersama.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Pembayaran aman</h3>
+        <p>Transaksi dilakukan lewat rekening bersama atau escrow pihak ketiga.</p>
+      </div>
+      <div class="step">
+        <div class="n">4</div>
+        <h3>Serah terima & garansi</h3>
+        <p>Data akun diserahkan dengan garansi susut sesuai kesepakatan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimoni">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Testimoni</div>
+      <h2>Kata mereka yang sudah transaksi</h2>
+    </div>
+    <div class="testi-row">
+      <div class="testi">
+        <p>Prosesnya cepat, akun sesuai deskripsi. Nego juga enak diajak diskusi.</p>
+        <div class="who">— Pembeli akun Mobile Legends</div>
+      </div>
+      <div class="testi">
+        <p>Titip jual akun Genshin laku dalam 3 hari, harga sesuai ekspektasi saya.</p>
+        <div class="who">— Penjual akun Genshin Impact</div>
+      </div>
+      <div class="testi">
+        <p>Top up UC masuk kurang dari 5 menit, jadi langganan tiap bulan.</p>
+        <div class="who">— Pelanggan top up PUBG Mobile</div>
+      </div>
+      <div class="testi">
+        <p>Ada garansi jelas, jadi tenang pas transfer akun rank tinggi.</p>
+        <div class="who">— Pembeli akun Valorant</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontak">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>Siap mulai transaksi?</h2>
+      <p>Chat langsung untuk konsultasi jual, beli, atau top up akun game kamu — respon cepat setiap hari.</p>
+      <a class="btn-primary" href="#">Chat via WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© 2026 LapakGame. Jual beli & top up game online.</div>
+    <div>Instagram · WhatsApp · Discord</div>
+  </div>
+</footer>
+
+</body>
+</html>
